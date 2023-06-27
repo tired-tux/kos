@@ -160,9 +160,6 @@ pub fn decrypt() {
     println!("Decrypted message: {}", decrypted_message);
 }
 
-
-
-
 pub fn gen() {
     let mut rng = rand::thread_rng();
 
