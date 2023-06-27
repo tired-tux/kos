@@ -4,18 +4,20 @@ use std::fs;
 use std::io;
 
 fn main() {
-    println!("\tA. Generate new Key, Offset, and Salt.\n\tB. Encrypt with stored Key, Offset, and Salt.\n\tC. Decrypt with external Key, Offset, and Salt.");
+    loop {
+        println!("\tA. Generate new Key, Offset, and Salt.\n\tB. Encrypt with stored Key, Offset, and Salt.\n\tC. Decrypt with external Key, Offset, and Salt.");
 
-    let mut input = String::new();
-    io::stdin()
-        .read_line(&mut input)
-        .expect("Failed to read input");
+        let mut input = String::new();
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read input");
 
-    match input.trim() {
-        "A" => gen(),
-        "B" => encrypt(),
-        "C" => decrypt(),
-        _ => println!("Invalid option."),
+        match input.trim() {
+            "A" => gen(),
+            "B" => encrypt(),
+            "C" => decrypt(),
+            _ => println!("Invalid option."),
+        }
     }
 }
 
@@ -88,7 +90,8 @@ fn encrypt() {
     let mut encrypted_message: Vec<u8> = Vec::new();
 
     for (i, c) in message.chars().enumerate() {
-        let encrypted_char = c as u8 + key[i % key.len()] + offset[i % offset.len()] - salt[i % salt.len()];
+        let encrypted_char =
+            c as u8 + key[i % key.len()] + offset[i % offset.len()] - salt[i % salt.len()];
         encrypted_message.push(encrypted_char);
     }
 
@@ -168,7 +171,8 @@ fn decrypt() {
     let mut decrypted_message: Vec<u8> = Vec::new();
 
     for (i, &char_byte) in encrypted_message.iter().enumerate() {
-        let decrypted_char = char_byte - key[i % key.len()] - offset[i % offset.len()] + salt[i % salt.len()];
+        let decrypted_char =
+            char_byte - key[i % key.len()] - offset[i % offset.len()] + salt[i % salt.len()];
         decrypted_message.push(decrypted_char);
     }
 
