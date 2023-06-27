@@ -78,7 +78,7 @@ pub fn encrypt(message: &str) {
     }
 }
 
-pub fn decrypt() -> &str {
+pub fn decrypt() -> String {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(error) => {
@@ -156,7 +156,7 @@ pub fn decrypt() -> &str {
         decrypted_message.push(decrypted_char as char);
     }
 
-    return
+    return(decrypted_message);
 }
 
 pub fn gen() {
