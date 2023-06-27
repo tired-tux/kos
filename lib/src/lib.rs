@@ -81,9 +81,6 @@ pub fn encrypt(message: &str) {
 pub fn decrypt() -> String {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
-        Err(error) => {
-            eprintln!("");
-        }
     };
 
     let parsed_data: serde_json::Value = match serde_json::from_str(&file_contents) {
