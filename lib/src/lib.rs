@@ -8,7 +8,7 @@ pub fn encrypt(message: &str) {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(error) => {
-            eprintln!("Failed to load data from file: {}", error);
+            eprintln!("");
             return;
         }
     };
@@ -16,7 +16,7 @@ pub fn encrypt(message: &str) {
     let parsed_data: serde_json::Value = match serde_json::from_str(&file_contents) {
         Ok(data) => data,
         Err(error) => {
-            eprintln!("Failed to parse JSON data: {}", error);
+            eprintln!("");
             return;
         }
     };
@@ -25,12 +25,12 @@ pub fn encrypt(message: &str) {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
-                eprintln!("Invalid key data");
+                eprintln!("");
                 return;
             }
         },
         None => {
-            eprintln!("Key not found in JSON data");
+            eprintln!("");
             return;
         }
     };
@@ -39,12 +39,12 @@ pub fn encrypt(message: &str) {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
-                eprintln!("Invalid offset data");
+                eprintln!("");
                 return;
             }
         },
         None => {
-            eprintln!("Offset not found in JSON data");
+            eprintln!("");
             return;
         }
     };
@@ -53,12 +53,12 @@ pub fn encrypt(message: &str) {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
-                eprintln!("Invalid salt data");
+                eprintln!("");
                 return;
             }
         },
         None => {
-            eprintln!("Salt not found in JSON data");
+            eprintln!("");
             return;
         }
     };
@@ -78,11 +78,11 @@ pub fn encrypt(message: &str) {
     }
 }
 
-pub fn decrypt() {
+pub fn decrypt() -> &str {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(error) => {
-            eprintln!("Failed to load data from file: {}", error);
+            eprintln!("");
             return;
         }
     };
@@ -90,7 +90,7 @@ pub fn decrypt() {
     let parsed_data: serde_json::Value = match serde_json::from_str(&file_contents) {
         Ok(data) => data,
         Err(error) => {
-            eprintln!("Failed to parse JSON data: {}", error);
+            eprintln!("");
             return;
         }
     };
@@ -99,12 +99,12 @@ pub fn decrypt() {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
-                eprintln!("Invalid key data");
+                eprintln!("");
                 return;
             }
         },
         None => {
-            eprintln!("Key not found in JSON data");
+            eprintln!("");
             return;
         }
     };
@@ -113,12 +113,12 @@ pub fn decrypt() {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
-                eprintln!("Invalid offset data");
+                eprintln!("");
                 return;
             }
         },
         None => {
-            eprintln!("Offset not found in JSON data");
+            eprintln!("");
             return;
         }
     };
@@ -127,7 +127,7 @@ pub fn decrypt() {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
-                eprintln!("Invalid salt data");
+                eprintln!("");
                 return;
             }
         },
@@ -140,7 +140,7 @@ pub fn decrypt() {
     let encoded_message = match fs::read("message.kos") {
         Ok(contents) => contents,
         Err(error) => {
-            eprintln!("Failed to load encoded message from file: {}", error);
+            eprintln!("");
             return;
         }
     };
@@ -156,7 +156,7 @@ pub fn decrypt() {
         decrypted_message.push(decrypted_char as char);
     }
 
-    println!("Decrypted message: {}", decrypted_message);
+    return
 }
 
 pub fn gen() {
@@ -175,7 +175,7 @@ pub fn gen() {
     let json_data = serde_json::to_string(&pair).unwrap();
 
     match fs::write("pair.kos", json_data) {
-        Ok(_) => print!("Key, Offset, and Salt generated and saved successfully."),
+        Ok(_) => print!(""),
         Err(_error) => eprint!(""),
     }
 }
