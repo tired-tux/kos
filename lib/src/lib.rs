@@ -83,6 +83,7 @@ pub fn decrypt() -> String {
         Ok(contents) => contents,
         Err(error) => {
             eprintln!("");
+            return;
         }
     };
 
@@ -90,6 +91,7 @@ pub fn decrypt() -> String {
         Ok(data) => data,
         Err(error) => {
             eprintln!("");
+            return;
         }
     };
 
@@ -98,10 +100,12 @@ pub fn decrypt() -> String {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
                 eprintln!("");
+                return;
             }
         },
         None => {
             eprintln!("");
+            return;
         }
     };
 
@@ -110,10 +114,12 @@ pub fn decrypt() -> String {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
                 eprintln!("");
+                return;
             }
         },
         None => {
             eprintln!("");
+            return;
         }
     };
 
@@ -122,10 +128,12 @@ pub fn decrypt() -> String {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
                 eprintln!("");
+                return;
             }
         },
         None => {
             eprintln!("Salt not found in JSON data");
+            return;
         }
     };
 
@@ -133,6 +141,7 @@ pub fn decrypt() -> String {
         Ok(contents) => contents,
         Err(error) => {
             eprintln!("");
+            return;
         }
     };
 
