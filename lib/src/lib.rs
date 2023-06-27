@@ -3,7 +3,6 @@ extern crate serde_json;
 use rand::Rng;
 use serde_json::json;
 use std::fs;
-use std::io;
 
 pub fn encrypt(message: &str) {
     let file_contents = match fs::read_to_string("pair.kos") {
@@ -75,7 +74,7 @@ pub fn encrypt(message: &str) {
 
     match fs::write("message.kos", encrypted_message) {
         Ok(_) => print!(""),
-        Err(error) => eprint!(""),
+        Err(_error) => eprint!(""),
     }
 }
 
@@ -177,6 +176,6 @@ pub fn gen() {
 
     match fs::write("pair.kos", json_data) {
         Ok(_) => print!("Key, Offset, and Salt generated and saved successfully."),
-        Err(error) => eprint!(""),
+        Err(_error) => eprint!(""),
     }
 }
