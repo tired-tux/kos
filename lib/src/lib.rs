@@ -83,7 +83,7 @@ pub fn decrypt() -> String {
         Ok(contents) => contents,
         Err(error) => {
             eprintln!("");
-            return;
+            return String::new();
         }
     };
 
@@ -91,7 +91,7 @@ pub fn decrypt() -> String {
         Ok(data) => data,
         Err(error) => {
             eprintln!("");
-            return;
+            return String::new();
         }
     };
 
@@ -100,12 +100,12 @@ pub fn decrypt() -> String {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
                 eprintln!("");
-                return;
+                return String::new();
             }
         },
         None => {
             eprintln!("");
-            return;
+            return String::new();
         }
     };
 
@@ -114,12 +114,12 @@ pub fn decrypt() -> String {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
                 eprintln!("");
-                return;
+                return String::new();
             }
         },
         None => {
             eprintln!("");
-            return;
+            return String::new();
         }
     };
 
@@ -128,12 +128,12 @@ pub fn decrypt() -> String {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
                 eprintln!("");
-                return;
+                return String::new();
             }
         },
         None => {
             eprintln!("Salt not found in JSON data");
-            error;
+            return String::new();
         }
     };
 
@@ -141,7 +141,7 @@ pub fn decrypt() -> String {
         Ok(contents) => contents,
         Err(error) => {
             eprintln!("");
-            error;
+            return String::new();
         }
     };
 
@@ -158,6 +158,7 @@ pub fn decrypt() -> String {
 
     decrypted_message
 }
+
 
 pub fn gen() {
     let mut rng = rand::thread_rng();
