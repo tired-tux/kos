@@ -85,60 +85,28 @@ pub fn decrypt() -> String {
 
     let parsed_data: serde_json::Value = match serde_json::from_str(&file_contents) {
         Ok(data) => data,
-        Err(error) => {
-            eprintln!("");
-            return;
-        }
     };
 
     let key: Vec<u8> = match parsed_data.get("k") {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
-            None => {
-                eprintln!("");
-                return;
-            }
-        },
-        None => {
-            eprintln!("");
-            return;
         }
     };
 
     let offset: Vec<u8> = match parsed_data.get("o") {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
-            None => {
-                eprintln!("");
-                return;
-            }
-        },
-        None => {
-            eprintln!("");
-            return;
         }
     };
 
     let salt: Vec<u8> = match parsed_data.get("s") {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
-            None => {
-                eprintln!("");
-                return;
-            }
-        },
-        None => {
-            eprintln!("Salt not found in JSON data");
-            return;
         }
     };
 
     let encoded_message = match fs::read("message.kos") {
-        Ok(contents) => contents,
-        Err(error) => {
-            eprintln!("");
-            return;
-        }
+        Ok(contents) => contents
     };
 
     let mut decrypted_message = String::new();
