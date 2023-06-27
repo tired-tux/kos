@@ -1,27 +1,11 @@
+extern crate rand;
+extern crate serde_json;
 use rand::Rng;
 use serde_json::json;
 use std::fs;
 use std::io;
 
-fn main() {
-    loop {
-        println!("\tA. Generate new Key, Offset, and Salt.\n\tB. Encrypt with stored Key, Offset, and Salt.\n\tC. Decrypt with external Key, Offset, and Salt.");
-
-        let mut input = String::new();
-        io::stdin()
-            .read_line(&mut input)
-            .expect("Failed to read input");
-
-        match input.trim() {
-            "A" => gen(),
-            "B" => encrypt(),
-            "C" => decrypt(),
-            _ => println!("Invalid option."),
-        }
-    }
-}
-
-fn encrypt() {
+pub fn encrypt(message: &str) {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(error) => {
@@ -79,13 +63,7 @@ fn encrypt() {
             return;
         }
     };
-    println!("Enter data to encrypt");
-    let mut input = String::new();
-    io::stdin()
-        .read_line(&mut input)
-        .expect("Failed to read input");
-
-    let message = input.trim();
+    
 
     let mut encrypted_message: Vec<u8> = Vec::new();
 
@@ -96,12 +74,12 @@ fn encrypt() {
     }
 
     match fs::write("message.kos", encrypted_message) {
-        Ok(_) => println!("Message encrypted and saved successfully."),
-        Err(error) => eprintln!("Failed to save encrypted message: {}", error),
+        Ok(_) => print!(""),
+        Err(error) => eprint!(""),
     }
 }
 
-fn decrypt() {
+pub fn decrypt() {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(error) => {
@@ -185,7 +163,7 @@ fn decrypt() {
 
 
 
-fn gen() {
+pub fn gen() {
     let mut rng = rand::thread_rng();
 
     let key: Vec<u8> = (0..1024).map(|_| rng.gen_range(1..=50)).collect();
@@ -201,7 +179,7 @@ fn gen() {
     let json_data = serde_json::to_string(&pair).unwrap();
 
     match fs::write("pair.kos", json_data) {
-        Ok(_) => println!("Key, Offset, and Salt generated and saved successfully."),
-        Err(error) => eprintln!("Failed to save data to file: {}", error),
+        Ok(_) => print!("Key, Offset, and Salt generated and saved successfully."),
+        Err(error) => eprint!(""),
     }
 }
