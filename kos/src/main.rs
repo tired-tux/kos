@@ -1,24 +1,25 @@
 use rand::Rng;
-use serde_json::*;
+use serde_json::json;
 use std::fs;
 use std::io;
 
 fn main() {
     println!("\tA. Generate new Key, Offset, and Salt.\n\tB. Encrypt with stored Key, Offset, and Salt.\n\tC. Decrypt with external Key, Offset, and Salt.");
+
     let mut input = String::new();
     io::stdin()
         .read_line(&mut input)
         .expect("Failed to read input");
-    if input.trim() == "B" {
-        encrypt();
-    }
-    if input.trim() == "A" {
-        gen();
+
+    match input.trim() {
+        "A" => gen(),
+        "B" => encrypt(),
+        "C" => decrypt(),
+        _ => println!("Invalid option."),
     }
 }
 
 fn encrypt() {
-    // Load data from a file
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(error) => {
@@ -27,7 +28,6 @@ fn encrypt() {
         }
     };
 
-    // Parse JSON data
     let parsed_data: serde_json::Value = match serde_json::from_str(&file_contents) {
         Ok(data) => data,
         Err(error) => {
@@ -36,8 +36,7 @@ fn encrypt() {
         }
     };
 
-    // Extract key, offset, and salt
-    let key = match parsed_data.get("k") {
+    let key: Vec<u8> = match parsed_data.get("k") {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
@@ -50,7 +49,8 @@ fn encrypt() {
             return;
         }
     };
-    let offset = match parsed_data.get("o") {
+
+    let offset: Vec<u8> = match parsed_data.get("o") {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
@@ -63,7 +63,95 @@ fn encrypt() {
             return;
         }
     };
-    let salt = match parsed_data.get("s") {
+
+    let salt: Vec<u8> = match parsed_data.get("s") {
+        Some(value) => match value.as_array() {
+            Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
+            None => {
+                eprintln!("Invalid salt data");
+                return;
+            }
+        },
+        None => {
+            eprintln!("Salt not found in JSON data");
+            return;
+        }
+    };
+    println!("Enter data to encrypt");
+    let mut input = String::new();
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Failed to read input");
+
+    let message = input.trim();
+
+    let mut encrypted_message: Vec<u8> = Vec::new();
+
+    for (i, c) in message.chars().enumerate() {
+        let encrypted_char = c as u8 + key[i % key.len()] + offset[i % offset.len()] - salt[i % salt.len()];
+        encrypted_message.push(encrypted_char);
+    }
+
+    match fs::write("message.kos", encrypted_message) {
+        Ok(_) => println!("Message encrypted and saved successfully."),
+        Err(error) => eprintln!("Failed to save encrypted message: {}", error),
+    }
+}
+
+fn decrypt() {
+    let encrypted_message = match fs::read("message.kos") {
+        Ok(contents) => contents,
+        Err(error) => {
+            eprintln!("Failed to load encrypted message from file: {}", error);
+            return;
+        }
+    };
+
+    let file_contents = match fs::read_to_string("pair.kos") {
+        Ok(contents) => contents,
+        Err(error) => {
+            eprintln!("Failed to load data from file: {}", error);
+            return;
+        }
+    };
+
+    let parsed_data: serde_json::Value = match serde_json::from_str(&file_contents) {
+        Ok(data) => data,
+        Err(error) => {
+            eprintln!("Failed to parse JSON data: {}", error);
+            return;
+        }
+    };
+
+    let key: Vec<u8> = match parsed_data.get("k") {
+        Some(value) => match value.as_array() {
+            Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
+            None => {
+                eprintln!("Invalid key data");
+                return;
+            }
+        },
+        None => {
+            eprintln!("Key not found in JSON data");
+            return;
+        }
+    };
+
+    let offset: Vec<u8> = match parsed_data.get("o") {
+        Some(value) => match value.as_array() {
+            Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
+            None => {
+                eprintln!("Invalid offset data");
+                return;
+            }
+        },
+        None => {
+            eprintln!("Offset not found in JSON data");
+            return;
+        }
+    };
+
+    let salt: Vec<u8> = match parsed_data.get("s") {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
             None => {
@@ -77,29 +165,15 @@ fn encrypt() {
         }
     };
 
-    let mut input = String::new();
-    io::stdin()
-        .read_line(&mut input)
-        .expect("Failed to read input");
+    let mut decrypted_message: Vec<u8> = Vec::new();
 
-    let text = input.trim();
-
-    let mut message: Vec<u8> = Vec::new();
-
-    for (i, c) in text.chars().enumerate() {
-        let encrypted_char = (c as u8).wrapping_add(key[i % key.len()])
-            .wrapping_sub(offset[i % offset.len()])
-            .wrapping_sub(salt[i % salt.len()]);
-        message.push(encrypted_char);
+    for (i, &char_byte) in encrypted_message.iter().enumerate() {
+        let decrypted_char = char_byte - key[i % key.len()] - offset[i % offset.len()] + salt[i % salt.len()];
+        decrypted_message.push(decrypted_char);
     }
 
-    // Save the encrypted message to a file
-    if let Err(error) = fs::write("message.kos", &message) {
-        eprintln!("Failed to save encrypted message to file: {}", error);
-        return;
-    }
-
-    println!("Message encrypted successfully.");
+    let decrypted_message_str = String::from_utf8_lossy(&decrypted_message);
+    println!("Decrypted Message: {}", decrypted_message_str);
 }
 
 fn gen() {
@@ -115,14 +189,10 @@ fn gen() {
         "s": salt
     });
 
-    // Convert the data to JSON format
     let json_data = serde_json::to_string(&pair).unwrap();
 
-    // Save the JSON data to a file
-    if let Err(error) = fs::write("pair.kos", json_data) {
-        eprintln!("Failed to save data to file: {}", error);
-        return;
+    match fs::write("pair.kos", json_data) {
+        Ok(_) => println!("Key, Offset, and Salt generated and saved successfully."),
+        Err(error) => eprintln!("Failed to save data to file: {}", error),
     }
-
-    println!("Data saved successfully.");
 }
