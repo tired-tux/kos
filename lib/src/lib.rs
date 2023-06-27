@@ -62,7 +62,6 @@ pub fn encrypt(message: &str) {
             return;
         }
     };
-    
 
     let mut encrypted_message: Vec<u8> = Vec::new();
 
@@ -77,7 +76,6 @@ pub fn encrypt(message: &str) {
         Err(_error) => eprint!(""),
     }
 }
-
 pub fn decrypt() -> String {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
@@ -158,8 +156,6 @@ pub fn decrypt() -> String {
 
     decrypted_message
 }
-
-
 pub fn gen() {
     let mut rng = rand::thread_rng();
 
