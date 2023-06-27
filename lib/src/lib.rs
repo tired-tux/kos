@@ -7,7 +7,7 @@ use std::fs;
 pub fn encrypt(message: &str) {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
-        Err(error) => {
+        Err(_error) => {
             eprintln!("");
             return;
         }
@@ -15,7 +15,7 @@ pub fn encrypt(message: &str) {
 
     let parsed_data: serde_json::Value = match serde_json::from_str(&file_contents) {
         Ok(data) => data,
-        Err(error) => {
+        Err(_error) => {
             eprintln!("");
             return;
         }
@@ -81,7 +81,7 @@ pub fn encrypt(message: &str) {
 pub fn decrypt() -> String {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
-        Err(error) => {
+        Err(_error) => {
             eprintln!("");
             return String::new();
         }
@@ -89,7 +89,7 @@ pub fn decrypt() -> String {
 
     let parsed_data: serde_json::Value = match serde_json::from_str(&file_contents) {
         Ok(data) => data,
-        Err(error) => {
+        Err(_error) => {
             eprintln!("");
             return String::new();
         }
@@ -139,7 +139,7 @@ pub fn decrypt() -> String {
 
     let encoded_message = match fs::read("message.kos") {
         Ok(contents) => contents,
-        Err(error) => {
+        Err(_error) => {
             eprintln!("");
             return String::new();
         }
