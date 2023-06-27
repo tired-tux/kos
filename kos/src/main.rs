@@ -102,14 +102,6 @@ fn encrypt() {
 }
 
 fn decrypt() {
-    let encrypted_message = match fs::read("message.kos") {
-        Ok(contents) => contents,
-        Err(error) => {
-            eprintln!("Failed to load encrypted message from file: {}", error);
-            return;
-        }
-    };
-
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(error) => {
@@ -168,17 +160,30 @@ fn decrypt() {
         }
     };
 
-    let mut decrypted_message: Vec<u8> = Vec::new();
+    let encoded_message = match fs::read("message.kos") {
+        Ok(contents) => contents,
+        Err(error) => {
+            eprintln!("Failed to load encoded message from file: {}", error);
+            return;
+        }
+    };
 
-    for (i, &char_byte) in encrypted_message.iter().enumerate() {
-        let decrypted_char =
-            char_byte - key[i % key.len()] - offset[i % offset.len()] + salt[i % salt.len()];
-        decrypted_message.push(decrypted_char);
+    let mut decrypted_message = String::new();
+
+    for (i, encoded_char) in encoded_message.iter().enumerate() {
+        let decrypted_char = encoded_char
+            .wrapping_sub(key[i % key.len()])
+            .wrapping_sub(offset[i % offset.len()])
+            .wrapping_add(salt[i % salt.len()]);
+
+        decrypted_message.push(decrypted_char as char);
     }
 
-    let decrypted_message_str = String::from_utf8_lossy(&decrypted_message);
-    println!("Decrypted Message: {}", decrypted_message_str);
+    println!("Decrypted message: {}", decrypted_message);
 }
+
+
+
 
 fn gen() {
     let mut rng = rand::thread_rng();
