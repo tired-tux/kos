@@ -156,7 +156,7 @@ pub fn decrypt() -> String {
         decrypted_message.push(decrypted_char as char);
     }
 
-    return(decrypted_message);
+    decrypted_message
 }
 
 pub fn gen() {
