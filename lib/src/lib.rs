@@ -83,7 +83,6 @@ pub fn decrypt() -> String {
         Ok(contents) => contents,
         Err(error) => {
             eprintln!("");
-            return;
         }
     };
 
