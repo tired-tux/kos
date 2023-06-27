@@ -159,9 +159,9 @@ pub fn decrypt() -> String {
 pub fn gen() {
     let mut rng = rand::thread_rng();
 
-    let key: Vec<u8> = (0..1024).map(|_| rng.gen_range(1..=50)).collect();
-    let offset: Vec<u8> = (0..1024).map(|_| rng.gen_range(1..=50)).collect();
-    let salt: Vec<u8> = (0..1024).map(|_| rng.gen_range(1..=50)).collect();
+    let key: Vec<u8> = (0..10240).map(|_| rng.gen_range(1..=50)).collect();
+    let offset: Vec<u8> = (0..10240).map(|_| rng.gen_range(1..=50)).collect();
+    let salt: Vec<u8> = (0..10240).map(|_| rng.gen_range(1..=50)).collect();
 
     let pair = json!({
         "k": key,
