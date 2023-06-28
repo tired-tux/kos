@@ -178,52 +178,52 @@ pub fn gen() {
 }
 pub fn tux(str: &str) {
     if str == "bird" {
-        let tux = "             .:xxxxxxxx:.\n
-                             .xxxxxxxxxxxxxxxx.\n
-                            :xxxxxxxxxxxxxxxxxxx:.\n
-                           .xxxxxxxxxxxxxxxxxxxxxxx:\n
-                          :xxxxxxxxxxxxxxxxxxxxxxxxx:\n
-                          xxxxxxxxxxxxxxxxxxxxxxxxxxX:\n
-                          xxx:::xxxxxxxx::::xxxxxxxxx:\n
-                         .xx:   ::xxxxx:     :xxxxxxxx\n
-                         :xx  x.  xxxx:  xx.  xxxxxxxx\n
-                         :xx xxx  xxxx: xxxx  :xxxxxxx\n
-                         'xx 'xx  xxxx:. xx'  xxxxxxxx\n
-                          xx ::::::xx:::::.   xxxxxxxx\n
-                          xx:::::.::::.:::::::xxxxxxxx\n
-                          :x'::::'::::':::::':xxxxxxxxx.\n
-                          :xx.::::::::::::'   xxxxxxxxxx\n
-                          :xx: '::::::::'     :xxxxxxxxxx.\n
-                         .xx     '::::'        'xxxxxxxxxx.\n
-                       .xxxx                     'xxxxxxxxx.\n
-                     .xxxx                         'xxxxxxxxx.\n
-                   .xxxxx:                          xxxxxxxxxx.\n
-                  .xxxxx:'                          xxxxxxxxxxx.\n
-                 .xxxxxx:::.           .       ..:::_xxxxxxxxxxx:.\n
-                .xxxxxxx''      ':::''            ''::xxxxxxxxxxxx.\n
-                xxxxxx            :                  '::xxxxxxxxxxxx\n
-               :xxxx:'            :                    'xxxxxxxxxxxx:\n
-              .xxxxx              :                     ::xxxxxxxxxxxx\n
-              xxxx:'                                    ::xxxxxxxxxxxx\n
-              xxxx               .                      ::xxxxxxxxxxxx.\n
-          .:xxxxxx               :                      ::xxxxxxxxxxxx::\n
-          xxxxxxxx               :                      ::xxxxxxxxxxxxx:\n
-          xxxxxxxx               :                      ::xxxxxxxxxxxxx:\n
-          ':xxxxxx               '                      ::xxxxxxxxxxxx:'\n
-            .:. xx:.                                   .:xxxxxxxxxxxxx'\n
-          ::::::.'xx:.            :                  .:: xxxxxxxxxxx':\n
-  .:::::::::::::::.'xxxx.                            ::::'xxxxxxxx':::.\n
-  ::::::::::::::::::.'xxxxx                          :::::.'.xx.'::::::.\n
-  ::::::::::::::::::::.'xxxx:.                       :::::::.'':::::::::\n
-  ':::::::::::::::::::::.'xx:'                     .'::::::::::::::::::::..\n
-    :::::::::::::::::::::.'xx                    .:: :::::::::::::::::::::::\n
-  .:::::::::::::::::::::::. xx               .::xxxx :::::::::::::::::::::::\n
-  :::::::::::::::::::::::::.'xxx..        .::xxxxxxx ::::::::::::::::::::'\n
-  '::::::::::::::::::::::::: xxxxxxxxxxxxxxxxxxxxxxx :::::::::::::::::'\n
-    '::::::::::::::::::::::: xxxxxxxxxxxxxxxxxxxxxxx :::::::::::::::'\n
-        ':::::::::::::::::::_xxxxxx::'''::xxxxxxxxxx '::::::::::::'\n
-             '':.::::::::::'                        `._'::::::''\n
+        let tux = "                                .:xxxxxxxx:.
+                             .xxxxxxxxxxxxxxxx.
+                            :xxxxxxxxxxxxxxxxxxx:.
+                           .xxxxxxxxxxxxxxxxxxxxxxx:
+                          :xxxxxxxxxxxxxxxxxxxxxxxxx:
+                          xxxxxxxxxxxxxxxxxxxxxxxxxxX:
+                          xxx:::xxxxxxxx::::xxxxxxxxx:
+                         .xx:   ::xxxxx:     :xxxxxxxx
+                         :xx  x.  xxxx:  xx.  xxxxxxxx
+                         :xx xxx  xxxx: xxxx  :xxxxxxx
+                         'xx 'xx  xxxx:. xx'  xxxxxxxx
+                          xx ::::::xx:::::.   xxxxxxxx
+                          xx:::::.::::.:::::::xxxxxxxx
+                          :x'::::'::::':::::':xxxxxxxxx.
+                          :xx.::::::::::::'   xxxxxxxxxx
+                          :xx: '::::::::'     :xxxxxxxxxx.
+                         .xx     '::::'        'xxxxxxxxxx.
+                       .xxxx                     'xxxxxxxxx.
+                     .xxxx                         'xxxxxxxxx.
+                   .xxxxx:                          xxxxxxxxxx.
+                  .xxxxx:'                          xxxxxxxxxxx.
+                 .xxxxxx:::.           .       ..:::_xxxxxxxxxxx:.
+                .xxxxxxx''      ':::''            ''::xxxxxxxxxxxx.
+                xxxxxx            :                  '::xxxxxxxxxxxx
+               :xxxx:'            :                    'xxxxxxxxxxxx:
+              .xxxxx              :                     ::xxxxxxxxxxxx
+              xxxx:'                                    ::xxxxxxxxxxxx
+              xxxx               .                      ::xxxxxxxxxxxx.
+          .:xxxxxx               :                      ::xxxxxxxxxxxx::
+          xxxxxxxx               :                      ::xxxxxxxxxxxxx:
+          xxxxxxxx               :                      ::xxxxxxxxxxxxx:
+          ':xxxxxx               '                      ::xxxxxxxxxxxx:'
+            .:. xx:.                                   .:xxxxxxxxxxxxx'
+          ::::::.'xx:.            :                  .:: xxxxxxxxxxx':
+  .:::::::::::::::.'xxxx.                            ::::'xxxxxxxx':::.
+  ::::::::::::::::::.'xxxxx                          :::::.'.xx.'::::::.
+  ::::::::::::::::::::.'xxxx:.                       :::::::.'':::::::::
+  ':::::::::::::::::::::.'xx:'                     .'::::::::::::::::::::..
+    :::::::::::::::::::::.'xx                    .:: :::::::::::::::::::::::
+  .:::::::::::::::::::::::. xx               .::xxxx :::::::::::::::::::::::
+  :::::::::::::::::::::::::.'xxx..        .::xxxxxxx ::::::::::::::::::::'
+  '::::::::::::::::::::::::: xxxxxxxxxxxxxxxxxxxxxxx :::::::::::::::::'
+    '::::::::::::::::::::::: xxxxxxxxxxxxxxxxxxxxxxx :::::::::::::::'
+        ':::::::::::::::::::_xxxxxx::'''::xxxxxxxxxx '::::::::::::'
+             '':.::::::::::'                        `._'::::::''
 ";
-        println!("{tux}");
+        println!("{}", tux);
     }
 }
