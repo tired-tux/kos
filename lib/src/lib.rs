@@ -5,8 +5,8 @@ use serde_json::json;
 use std::fs;
 
 pub fn encrypt(message: &str, file: &str) {
-    let fiel = format!("{file}.kos");
-    let file_contents = match fs::read_to_string("pair.kos") {
+    let fiel = format!("kos/{file}.kos");
+    let file_contents = match fs::read_to_string("kos/pair.kos") {
         Ok(contents) => contents,
         Err(_error) => {
             eprintln!("");
@@ -78,8 +78,8 @@ pub fn encrypt(message: &str, file: &str) {
     }
 }
 pub fn decrypt(file: &str) -> String {
-    let fiel = format!("{file}.kos");
-    let file_contents = match fs::read_to_string("pair.kos") {
+    let fiel = format!("kos/{file}.kos");
+    let file_contents = match fs::read_to_string("kos/pair.kos") {
         Ok(contents) => contents,
         Err(_error) => {
             eprintln!("");
