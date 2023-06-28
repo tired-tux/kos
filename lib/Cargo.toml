@@ -1,6 +1,6 @@
 [package]
 name = "kosalt"
-version = "3.1.6"
+version = "3.1.7"
 edition = "2021"
 authors = ["Eli <vmlinuz@duck.com>"]
 description = "This package allows for quick encoding and decoding text"
