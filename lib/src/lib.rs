@@ -122,7 +122,6 @@ pub fn decrypt(file: &str) -> String {
             return String::new();
         }
     };
-
     let salt: Vec<u8> = match parsed_data.get("s") {
         Some(value) => match value.as_array() {
             Some(arr) => arr.iter().map(|v| v.as_u64().unwrap() as u8).collect(),
@@ -158,7 +157,12 @@ pub fn decrypt(file: &str) -> String {
 
     decrypted_message
 }
+fn folder() -> std::io::Result<()> {
+    let _ = fs::create_dir("kos");
+    Ok(())
+}
 pub fn gen() {
+    let _ = folder();
     let mut rng = rand::thread_rng();
 
     let key: Vec<u8> = (0..10240).map(|_| rng.gen_range(1..=50)).collect();
@@ -173,7 +177,7 @@ pub fn gen() {
 
     let json_data = serde_json::to_string(&pair).unwrap();
 
-    match fs::write("pair.kos", json_data) {
+    match fs::write("kos/pair.kos", json_data) {
         Ok(_) => print!(""),
         Err(_error) => eprint!(""),
     }
