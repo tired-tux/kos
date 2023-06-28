@@ -1,5 +1,4 @@
-run = "cd kos && cargo run"
-hidden = ["target"]
+run = "cd kos/target/debug/ && ./kos"
 
 [packager]
 language = "rust"
