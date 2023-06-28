@@ -4,7 +4,7 @@ use rand::Rng;
 use serde_json::json;
 use std::fs;
 
-pub fn encrypt(message: &str) {
+pub fn encrypt(message: &str, file_name: &str) {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(_error) => {
@@ -71,12 +71,12 @@ pub fn encrypt(message: &str) {
         encrypted_message.push(encrypted_char);
     }
 
-    match fs::write("message.kos", encrypted_message) {
+    match fs::write("{file_name}.kos", encrypted_message) {
         Ok(_) => print!(""),
         Err(_error) => eprint!(""),
     }
 }
-pub fn decrypt() -> String {
+pub fn decrypt(file_name: &str) -> String {
     let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(_error) => {
@@ -135,7 +135,7 @@ pub fn decrypt() -> String {
         }
     };
 
-    let encoded_message = match fs::read("message.kos") {
+    let encoded_message = match fs::read("{file_name}.kos") {
         Ok(contents) => contents,
         Err(_error) => {
             eprintln!("");
