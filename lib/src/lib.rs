@@ -3,10 +3,10 @@ extern crate serde_json;
 use rand::Rng;
 use serde_json::json;
 use std::fs;
-use string_join::Join;
+
 pub fn encrypt(message: &str, file: &str) {
-   let fiel = ".kos".join(&file);
-	 let file_contents = match fs::read_to_string("pair.kos") {
+    let fiel = format!("{file}.kos");
+    let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(_error) => {
             eprintln!("");
@@ -78,8 +78,8 @@ pub fn encrypt(message: &str, file: &str) {
     }
 }
 pub fn decrypt(file: &str) -> String {
-    let fiel = ".kos".join(&file);
-	let file_contents = match fs::read_to_string("pair.kos") {
+    let fiel = format!("{file}.kos");
+    let file_contents = match fs::read_to_string("pair.kos") {
         Ok(contents) => contents,
         Err(_error) => {
             eprintln!("");
