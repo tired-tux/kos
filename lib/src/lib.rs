@@ -176,3 +176,54 @@ pub fn gen() {
         Err(_error) => eprint!(""),
     }
 }
+pub fn tux(str: &str) {
+    if str == "bird" {
+        let tux = "             .:xxxxxxxx:.\n
+                             .xxxxxxxxxxxxxxxx.\n
+                            :xxxxxxxxxxxxxxxxxxx:.\n
+                           .xxxxxxxxxxxxxxxxxxxxxxx:\n
+                          :xxxxxxxxxxxxxxxxxxxxxxxxx:\n
+                          xxxxxxxxxxxxxxxxxxxxxxxxxxX:\n
+                          xxx:::xxxxxxxx::::xxxxxxxxx:\n
+                         .xx:   ::xxxxx:     :xxxxxxxx\n
+                         :xx  x.  xxxx:  xx.  xxxxxxxx\n
+                         :xx xxx  xxxx: xxxx  :xxxxxxx\n
+                         'xx 'xx  xxxx:. xx'  xxxxxxxx\n
+                          xx ::::::xx:::::.   xxxxxxxx\n
+                          xx:::::.::::.:::::::xxxxxxxx\n
+                          :x'::::'::::':::::':xxxxxxxxx.\n
+                          :xx.::::::::::::'   xxxxxxxxxx\n
+                          :xx: '::::::::'     :xxxxxxxxxx.\n
+                         .xx     '::::'        'xxxxxxxxxx.\n
+                       .xxxx                     'xxxxxxxxx.\n
+                     .xxxx                         'xxxxxxxxx.\n
+                   .xxxxx:                          xxxxxxxxxx.\n
+                  .xxxxx:'                          xxxxxxxxxxx.\n
+                 .xxxxxx:::.           .       ..:::_xxxxxxxxxxx:.\n
+                .xxxxxxx''      ':::''            ''::xxxxxxxxxxxx.\n
+                xxxxxx            :                  '::xxxxxxxxxxxx\n
+               :xxxx:'            :                    'xxxxxxxxxxxx:\n
+              .xxxxx              :                     ::xxxxxxxxxxxx\n
+              xxxx:'                                    ::xxxxxxxxxxxx\n
+              xxxx               .                      ::xxxxxxxxxxxx.\n
+          .:xxxxxx               :                      ::xxxxxxxxxxxx::\n
+          xxxxxxxx               :                      ::xxxxxxxxxxxxx:\n
+          xxxxxxxx               :                      ::xxxxxxxxxxxxx:\n
+          ':xxxxxx               '                      ::xxxxxxxxxxxx:'\n
+            .:. xx:.                                   .:xxxxxxxxxxxxx'\n
+          ::::::.'xx:.            :                  .:: xxxxxxxxxxx':\n
+  .:::::::::::::::.'xxxx.                            ::::'xxxxxxxx':::.\n
+  ::::::::::::::::::.'xxxxx                          :::::.'.xx.'::::::.\n
+  ::::::::::::::::::::.'xxxx:.                       :::::::.'':::::::::\n
+  ':::::::::::::::::::::.'xx:'                     .'::::::::::::::::::::..\n
+    :::::::::::::::::::::.'xx                    .:: :::::::::::::::::::::::\n
+  .:::::::::::::::::::::::. xx               .::xxxx :::::::::::::::::::::::\n
+  :::::::::::::::::::::::::.'xxx..        .::xxxxxxx ::::::::::::::::::::'\n
+  '::::::::::::::::::::::::: xxxxxxxxxxxxxxxxxxxxxxx :::::::::::::::::'\n
+    '::::::::::::::::::::::: xxxxxxxxxxxxxxxxxxxxxxx :::::::::::::::'\n
+        ':::::::::::::::::::_xxxxxx::'''::xxxxxxxxxx '::::::::::::'\n
+             '':.::::::::::'                        `._'::::::''\n
+";
+        println!("{tux}");
+    }
+}
